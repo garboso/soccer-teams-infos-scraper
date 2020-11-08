@@ -1,18 +1,18 @@
 const fs = require('fs'),
-  puppeteer = require('puppeteer');
+puppeteer = require('puppeteer');
 
-async function getSquadsNames() {
+async function generateSquadsFile() {
   const browser = await puppeteer.launch(),
-    page = await browser.newPage(),
-    leaguesSelector = '.squads a',
-    teamsSelector = 'h5';
+  page = await browser.newPage(),
+  leaguesSelector = '.squads a',
+  teamsSelector = 'h5';
   let squadsNames = [];
 
   await page.goto('http://www.footballsquads.co.uk/squads.htm');
   await page.waitForSelector(leaguesSelector);
 
   const links = await page.evaluate((leaguesSelector) => {
-    return [...document.querySelectorAll(leaguesSelector)].map((link) => { return link.href })
+    return [...document.querySelectorAll(leaguesSelector)].map((link) => { return link.href; })
   }, leaguesSelector);
 
   for (let i = 0; i < links.length; i++) {
@@ -20,8 +20,8 @@ async function getSquadsNames() {
     await page.waitForSelector(teamsSelector);
 
     squadsNames = squadsNames.concat(await page.evaluate((teamsSelector) => {
-        return [...document.querySelectorAll(teamsSelector)].map((squad) => { return squad.innerText })
-      }, teamsSelector));
+      return [...document.querySelectorAll(teamsSelector)].map((squad) => { return squad.innerText; })
+    }, teamsSelector));
   }
 
   await browser.close();
