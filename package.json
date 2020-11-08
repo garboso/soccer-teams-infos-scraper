@@ -4,7 +4,10 @@
   "description": "scrape data from footballsquads.co.uk website",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "players": "node -e 'require(\"./app\").players()'",
+    "all": "node -e 'require(\"./app\").all()'",
+    "squads": "node -e 'require(\"./app\").squads()'"
   },
   "keywords": [
     "scraper",

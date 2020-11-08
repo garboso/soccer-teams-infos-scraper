@@ -88,3 +88,7 @@ async function generatePlayersFile() {
 function createJSONFile(name, data) {
   fs.writeFileSync(`${name}.json`, JSON.stringify(data));
 }
+
+module.exports.all = () => { generateSquadsFile(); generatePlayersFile(); };
+module.exports.players = () => { generatePlayersFile(); };
+module.exports.squads = () => { generateSquadsFile(); };
